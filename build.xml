@@ -1,0 +1,60 @@
+<project name="Sample usage of Salesforce Ant tasks" default="retrieveUnpackaged" basedir="." xmlns:sf="antlib:com.salesforce">
+
+    <property file="build.properties"/>
+    <property environment="env"/>
+
+    <target name="deployCodeCheckOnly" depends="proxy">
+      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="retrieveUnpackaged"
+	  checkOnly="yes"
+	  testLevel="RunLocalTests"
+	  pollWaitMillis="10000"
+	  maxPoll="100"
+	 />
+    </target>
+
+	<target name="retrieveUnpackaged" depends="proxy">
+      <mkdir dir="retrieveUnpackaged"/>     
+      <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="retrieveUnpackaged" unpackaged="unpackaged/package.xml"	
+	  pollWaitMillis="10000"
+	  maxPoll="100"
+	  />
+   </target> 
+
+	<target name="deployUnpackaged" depends="proxy"> 
+	<sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="retrieveUnpackaged" 
+	runAllTests="true" 
+	pollWaitMillis="10000" 
+	maxPoll="500" 
+	/> 	
+	</target> 
+	
+<!--<target name="deployCodeCheckOnly"> <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" deployRoot="retrieveUnpackaged" runAllTests="true" pollWaitMillis="10000" maxPoll="100" /> </target>   -->
+
+<!-- - Retrieve code with Proxy enabled - Proxy settings below You would need to add code to CheckOnly code as well if proxy required.
+
+ <target name="retrieveUnpackaged2" depends="proxy">
+      <mkdir dir="retrieveUnpackaged"/>     
+      <sf:retrieve username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" retrieveTarget="retrieveUnpackaged" unpackaged="unpackaged/package.xml"	
+	 pollWaitMillis="10000"
+	   maxPoll="100"
+	   />
+   </target>  
+
+-->
+
+	<target name="proxy">
+	<property name="proxy.host" value="10.86.33.21"/>
+	<property name="proxy.port" value="8080"/>
+	<property name="proxy.user" value=""/>
+	<property name="proxy.pass" value=""/>
+	<setproxy proxyhost="${proxy.host}" proxyport="${proxy.port}" proxyuser="${proxy.user}" proxypassword="${proxy.pass}"/>
+	</target>
+
+
+
+
+
+
+
+</project>
+
