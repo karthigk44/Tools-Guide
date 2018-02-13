@@ -34,7 +34,7 @@
     url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
     }
 </style>
-<script src="/soap/ajax/40.0/connection.js" type="text/javascript"></script>
+<script src="https://thomsonreuterstrust--trpocebb.cs68.my.salesforce.com/soap/ajax/40.0/connection.js" type="text/javascript"></script>
 <script type='text/javascript' src='https://service.force.com/embeddedservice/3.1/esw.min.js'></script>
 <script type='text/javascript'>
 //------------------------Chat Routing Request Insertion START-------------------//
@@ -45,7 +45,7 @@
         var UserId;
         var QueryType="";
       //  sforce.connection.serverUrl = '{!$Site.Prefix}/services/Soap/u/40.0';
-      //  sforce.connection.sessionId = "{!$Api.Session_ID}";
+        sforce.connection.sessionId = "{!$Api.Session_ID}";
         var visitorid="";
         var ContactId  ="";
         
@@ -59,11 +59,11 @@
             
             EikonIdToQuery = EikonIdToQuery.substring(staticLabel,EikonIdToQuery.length);
             
-         //   result = sforce.connection.query("select name, id, UserId__c,UUID__c,ContactId__c,ContactId__r.Name from Contact_User_Id__c where UUID__c = \'"+EikonIdToQuery+"\' limit 1");
+            result = sforce.connection.query("select name, id, UserId__c,UUID__c,ContactId__c,ContactId__r.Name from Contact_User_Id__c where UUID__c = \'"+EikonIdToQuery+"\' limit 1");
             var contactuserid= result.getArray("records");
              
             if(contactuserid.length==0){
-              //  result = sforce.connection.query("select name, id, UserId__c,UUID__c,ContactId__c,ContactId__r.Name from Contact_User_Id__c where UUID__c = \'"+TempUUID+"\' limit 1"); 
+                result = sforce.connection.query("select name, id, UserId__c,UUID__c,ContactId__c,ContactId__r.Name from Contact_User_Id__c where UUID__c = \'"+TempUUID+"\' limit 1"); 
                 var contactuserid= result.getArray("records");
             }
             if(!contactuserid.length==0){
@@ -89,7 +89,7 @@
         if(UserId!=null){
             cr.Contact__c=UserId.ContactId__c;
             ContactId =UserId.ContactId__c;
-      //      result = sforce.connection.query("Select Id,Name,UserId__c,Contact__c,Product_Category__c from Installed_Product_SC__c where UserId__c=\'"+UserId.UserId__c+"\' and Contact__c=\'"+UserId.ContactId__c+"\' and Status__c=\'Active\' and Type__c=\'Base\'");
+            result = sforce.connection.query("Select Id,Name,UserId__c,Contact__c,Product_Category__c from Installed_Product_SC__c where UserId__c=\'"+UserId.UserId__c+"\' and Contact__c=\'"+UserId.ContactId__c+"\' and Status__c=\'Active\' and Type__c=\'Base\'");
             var ip= result.getArray("records");
             
             if(!ip.length==0){
