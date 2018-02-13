@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <Title>Snap In Chat</title>
+<body>
 <style type='text/css'>
     .embeddedServiceHelpButton .helpButton .uiButton { background-color: #fc881b; font-family: "Salesforce Sans", sans-serif; }
     .embeddedServiceHelpButton .helpButton .uiButton:focus { outline: 1px solid #fc881b; }
@@ -110,6 +111,7 @@
     }
 //------------------------Chat Routing Request Insertion END-------------------*/
 var initESW = function(gslbBaseURL) {
+    alert("gslbBaseURL"+gslbBaseURL);
      var CRRID;
     var url= new URL(location);
      question= url.searchParams.get("question");
@@ -223,5 +225,5 @@ embedded_svc.settings.smallCompanyLogoImgURL = '';
 embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 embedded_svc.settings.entryFeature = 'LiveAgent';
 embedded_svc.init('https://thomsonreuterstrust--TRPOCEBB.cs68.my.salesforce.com', 'https://trpocebb-mythomsonreuters.cs68.force.com/ESCLiveAgent', gslbBaseURL, '00D1D0000008rhx', 'ESC_Live_Agent', { baseLiveAgentContentURL: 'https://c.la4-c1cs-phx.salesforceliveagent.com/content', deploymentId: '572400000004Ctq', buttonId: '5731D000000CaTI', baseLiveAgentURL: 'https://d.la4-c1cs-phx.salesforceliveagent.com/chat', eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I1D0000004C9DUAU_16141f4e6d6'}); };if (!window.embedded_svc) { var s = document.createElement('script'); s.setAttribute('src', 'https://thomsonreuterstrust--TRPOCEBB.cs68.my.salesforce.com/embeddedservice/3.1/esw.min.js'); s.onload = function() { initESW(null); }; document.body.appendChild(s); } else { initESW('https://thomsonreuterstrust--TRPOCEBB.cs68.my.salesforce.com'); }</script>
-
+</body>
 </html>
