@@ -73,7 +73,7 @@
         }
         
                 alert("ContactId"+ContactId);
-      return  CreateChatRoutingRequest();//Method to create the Chat Routing Request record with the details required for OAE.
+    //  return  CreateChatRoutingRequest();//Method to create the Chat Routing Request record with the details required for OAE.
         }
         
      
@@ -139,6 +139,7 @@ var initESW = function(gslbBaseURL) {
               question =obj[i].value;              
               }
             } */
+     getContactByLoginId();
         /*    alert('ni');
           var result1 = getContactByLoginId();
         for (var i=0; i<result1.length; i++) {
