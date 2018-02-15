@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <Title>Snap In Chat</title>
 <body>
+<h1>Chat plugin</h1>
 <style type='text/css'>
     .embeddedServiceHelpButton .helpButton .uiButton { background-color: #fc881b; font-family: "Salesforce Sans", sans-serif; }
     .embeddedServiceHelpButton .helpButton .uiButton:focus { outline: 1px solid #fc881b; }
@@ -34,10 +35,12 @@
     url('https://www.sfdcstatic.com/system/shared/common/assets/fonts/SalesforceSans/SalesforceSans-Regular.ttf') format('truetype');
     }
 </style>
-<script src="https://thomsonreuterstrust--trpocebb.cs68.my.salesforce.com/soap/ajax/40.0/connection.js" type="text/javascript"></script>
+<!--<script src="/soap/ajax/40.0/connection.js" type="text/javascript"></script> -->
 <script type='text/javascript' src='https://service.force.com/embeddedservice/3.1/esw.min.js'></script>
 <script type='text/javascript'>
+
 //------------------------Chat Routing Request Insertion START-------------------//
+
         var previousOnload = window.onload; 
         var EikonIdToQuery;
         var EikonUUId;
@@ -45,15 +48,14 @@
         var UserId;
         var QueryType="";
       //  sforce.connection.serverUrl = '{!$Site.Prefix}/services/Soap/u/40.0';
-        sforce.connection.sessionId = "{!$Api.Session_ID}";
-
+     //   sforce.connection.sessionId = "{!$Api.Session_ID}";
         var visitorid="";
         var ContactId  ="";
-        
-     function getContactByLoginId(){
+       // alert('123');
+  /*   function getContactByLoginId(){
         
         if(EikonUUId!=null && EikonUUId!=''){
-      //  alert('EikonUUId');
+        alert('EikonUUId');
             EikonIdToQuery = EikonUUId;
             var TempUUID = EikonIdToQuery; //Store the UUID before removing extra characters.
             var staticLabel = '{!($Label.ExtraCharacterEikonMessenger)}';
@@ -73,12 +75,11 @@
             }
         }
         
-                alert("ContactId"+ContactId);
-    //  return  CreateChatRoutingRequest();//Method to create the Chat Routing Request record with the details required for OAE.
-        }
+      return  CreateChatRoutingRequest();//Method to create the Chat Routing Request record with the details required for OAE.
+        }*/
         
      
-    function CreateChatRoutingRequest(){
+   /* function CreateChatRoutingRequest(){
         
         var cr =  new sforce.SObject("Chat_Routing_Request__c");
         cr.Question__c=question;
@@ -110,8 +111,12 @@
           cr.Query_Type__c=QueryType;
          var result = sforce.connection.create([cr])
         return result;
-    }
+    }*/
+
+
 //------------------------Chat Routing Request Insertion END-------------------*/
+
+
 var initESW = function(gslbBaseURL) {
      var CRRID;
     var url= new URL(location);
@@ -140,7 +145,6 @@ var initESW = function(gslbBaseURL) {
               question =obj[i].value;              
               }
             } */
-     getContactByLoginId();
         /*    alert('ni');
           var result1 = getContactByLoginId();
         for (var i=0; i<result1.length; i++) {
@@ -152,15 +156,20 @@ var initESW = function(gslbBaseURL) {
             
 embedded_svc.settings.displayHelpButton = true; //Or false
 embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
+
 embedded_svc.settings.defaultMinimizedText = 'Chat with Thomson Reuters Customer Support'; //(Defaults to Chat with an Expert)
 //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
+
 //embedded_svc.settings.loadingText = 'Waiting for Queue to be allocated'; //(Defaults to Loading)
 //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
+
 // Settings for Live Agent
 embedded_svc.settings.avatarImgURL = '';
 embedded_svc.settings.prechatBackgroundImgURL = 'https://thomsonreuterstrust--trpocebb--c.cs68.visual.force.com/resource/1518003331000/LiveAgentEikonLogoSignIn';
 embedded_svc.settings.waitingStateBackgroundImgURL = 'https://thomsonreuterstrust--trpocebb--c.cs68.visual.force.com/resource/1518003331000/LiveAgentLoaderOrangeonDark';
 embedded_svc.settings.smallCompanyLogoImgURL = '';
+
+
  
     obj = [{ "label": "UUID", "value": EikonUUId, "displayToAgent": true,"transcriptFields":["ESC_UUID__c"] },
           /*  { "label": "Chat Routing Request ID",
@@ -198,11 +207,12 @@ embedded_svc.settings.smallCompanyLogoImgURL = '';
                                         ]
                     ,"entityName":"Contact","saveToTranscript":"Contact","showOnCreate":false},
                     {"entityFieldMaps":[
-                                        {"doCreate":true,"doFind":false,"fieldName":"Subject","isExactMatch":false,"label":"Subject"}
+                                        {"doCreate":true,"doFind":false,"fieldName":"Question","isExactMatch":false,"label":"Subject"}
                                         ]
                     ,"entityName":"Case","saveToTranscript":"Case","showOnCreate":true}]; 
     }
     else{
+    
     embedded_svc.settings.extraPrechatInfo = [
                     {"entityFieldMaps":[
                                         {"doCreate":false,"doFind":false,"fieldName":"LastName","isExactMatch":false,"label":"Last Name"},
@@ -218,14 +228,27 @@ embedded_svc.settings.smallCompanyLogoImgURL = '';
   embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
     
   // alert('12');
+  var ret = "573e0000000CavW";
   if(EikonUUId !=null && EikonUUId != '')
-              return "573400000004Ctv";
-              else              
-    return '5731D000000CaTI';
+              ret = "573400000004Ctv";
+    //alert(ret);    
+    return ret;
     }  
     
+
 embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 embedded_svc.settings.entryFeature = 'LiveAgent';
-embedded_svc.init('https://thomsonreuterstrust--TRPOCEBB.cs68.my.salesforce.com', 'https://trpocebb-mythomsonreuters.cs68.force.com/ESCLiveAgent', gslbBaseURL, '00D1D0000008rhx', 'ESC_Live_Agent', { baseLiveAgentContentURL: 'https://c.la4-c1cs-phx.salesforceliveagent.com/content', deploymentId: '572400000004Ctq', buttonId: '5731D000000CaTI', baseLiveAgentURL: 'https://d.la4-c1cs-phx.salesforceliveagent.com/chat', eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I1D0000004C9DUAU_16141f4e6d6'}); };if (!window.embedded_svc) { var s = document.createElement('script'); s.setAttribute('src', 'https://thomsonreuterstrust--TRPOCEBB.cs68.my.salesforce.com/embeddedservice/3.1/esw.min.js'); s.onload = function() { initESW(null); }; document.body.appendChild(s); } else { initESW('https://thomsonreuterstrust--TRPOCEBB.cs68.my.salesforce.com'); }</script>
+
+embedded_svc.init('https://thomsonreuterstrust--MTRDEV.cs15.my.salesforce.com', 'https://mtrdev-mythomsonreuters.cs15.force.com/HelpApp', gslbBaseURL, '00De0000005Vydr', 'Snap_in', { baseLiveAgentContentURL: 'https://c.la1-c1cs-ord.salesforceliveagent.com/content', deploymentId: '572400000004Ctq', buttonId: '573e0000000CavW', baseLiveAgentURL: 'https://d.la1-c1cs-ord.salesforceliveagent.com/chat', eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04Ie00000004C9XEAU_1616eb190b3'}); };
+if (!window.embedded_svc)
+    { var s = document.createElement('script'); s.setAttribute('src', 'https://thomsonreuterstrust--MTRDEV.cs15.my.salesforce.com/embeddedservice/3.1/esw.min.js'); 
+s.onload = function()
+ { initESW(null);
+ }; 
+ document.body.appendChild(s);
+ } 
+else { initESW('https://service.force.com');
+ }
+ </script>
 </body>
 </html>
