@@ -1,4 +1,5 @@
-  var previousOnload = window.onload; 
+<script type="text/javascript"> 
+var previousOnload = window.onload; 
         var EikonIdToQuery;
         var EikonUUId;
         var question="";
@@ -129,3 +130,4 @@ s.onload = function()
  } 
 else { initESW('https://service.force.com');
  }
+</script>
