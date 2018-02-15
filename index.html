@@ -176,12 +176,12 @@ embedded_svc.settings.smallCompanyLogoImgURL = '';
             "value": CRRID,
             "displayToAgent": true,
             "transcriptFields":["ChatRoutingReqId__c"] 
-            }, */
+            }, 
             { "label": "Question",
             "value": question,
             "displayToAgent": true,
             "transcriptFields":["Question_del__c"] 
-            },
+            },*/
             { "label": "CaseNumber",
             "value": caseNumber,
             "displayToAgent": true,
@@ -207,7 +207,7 @@ embedded_svc.settings.smallCompanyLogoImgURL = '';
                                         ]
                     ,"entityName":"Contact","saveToTranscript":"Contact","showOnCreate":false},
                     {"entityFieldMaps":[
-                                        {"doCreate":true,"doFind":false,"fieldName":"Question","isExactMatch":false,"label":"Subject"}
+                                        {"doCreate":true,"doFind":false,"fieldName":"Subject","isExactMatch":false,"label":"Question"}
                                         ]
                     ,"entityName":"Case","saveToTranscript":"Case","showOnCreate":true}]; 
     }
@@ -230,7 +230,7 @@ embedded_svc.settings.smallCompanyLogoImgURL = '';
   // alert('12');
   var ret = "573e0000000CavW";
   if(EikonUUId !=null && EikonUUId != '')
-              ret = "573400000004Ctv";
+              ret = "573e0000000Cavb";
     //alert(ret);    
     return ret;
     }  
